@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DevOps Outsource Team</title>
+  <meta name="description" content="Serveringiz, CI/CD va monitoring ishlarini biz o'z zimmamizga olamiz.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <a class="logo" href="#">DevOps Outsource Team</a>
+    <nav>
+      <a href="#xizmatlar">Xizmatlar</a>
+      <a href="#jarayon">Jarayon</a>
+      <a href="#jamoa">Jamoa</a>
+      <a class="btn small" href="#aloqa">Bog'lanish</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <h1>Siz mahsulotni yozing. Deploy, server va monitoringni biz qilamiz.</h1>
+        <p>Kichik jamoalar uchun tayyor DevOps xizmati: server sozlash, CI/CD, Docker va doimiy nazorat.</p>
+        <a class="btn" href="#aloqa">Bepul maslahat olish</a>
+      </div>
+
+      <div class="pipeline" aria-live="polite">
+        <div class="pipe-head">
+          <span>main &middot; v1.0.0</span>
+          <button id="runBtn" class="btn small ghost" type="button">Deploy qilish</button>
+        </div>
+        <ol class="stages" id="stages">
+          <li data-time="4s"><i></i><b>Commit</b><span>kod yuborildi</span></li>
+          <li data-time="38s"><i></i><b>Build</b><span>Docker image yig'ildi</span></li>
+          <li data-time="21s"><i></i><b>Test</b><span>barcha testlar o'tdi</span></li>
+          <li data-time="12s"><i></i><b>Deploy</b><span>serverga chiqarildi</span></li>
+        </ol>
+        <p class="pipe-status" id="pipeStatus">Tugmani bosing va pipeline&rsquo;ni ishga tushiring.</p>
+      </div>
+    </section>
+
+    <section id="xizmatlar" class="block">
+      <h2>Nimalarni qilamiz</h2>
+      <div class="services">
+        <article>
+          <h3>Server va tarmoq</h3>
+          <p>Linux server, Nginx, HTTPS va xavfsizlik sozlamalari. Serveringiz birinchi kundan tayyor bo'ladi.</p>
+        </article>
+        <article>
+          <h3>CI/CD</h3>
+          <p>GitHub Actions orqali build, test va deploy avtomatik ishlaydi. Natija Telegram&rsquo;ga keladi.</p>
+        </article>
+        <article>
+          <h3>Docker va konteynerlar</h3>
+          <p>Loyihangizni Docker&rsquo;ga o'tkazamiz, shunda u har joyda bir xil ishlaydi.</p>
+        </article>
+        <article>
+          <h3>Monitoring</h3>
+          <p>Server tushib qolsa, siz bilishdan oldin biz xabar olamiz va tuzatamiz.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="jarayon" class="block alt">
+      <h2>Qanday ishlaymiz</h2>
+      <ol class="steps">
+        <li><b>Tahlil.</b> Loyiha va serveringizni ko'rib chiqamiz.</li>
+        <li><b>Reja.</b> Narx va muddatni oldindan kelishamiz.</li>
+        <li><b>Joriy qilish.</b> Pipeline va serverni sozlaymiz.</li>
+        <li><b>Qo'llab-quvvatlash.</b> Monitoring va yangilanishlar bizda qoladi.</li>
+      </ol>
+    </section>
+
+    <section id="jamoa" class="block">
+      <h2>Jamoa</h2>
+      <p class="lead">Jamoa a'zolari o'z ismi va rolini shu yerga qo'shadi (feature branch &rarr; PR).</p>
+      <div class="team" id="team"></div>
+    </section>
+
+    <section id="aloqa" class="block alt contact">
+      <h2>Loyihangiz haqida yozing</h2>
+      <form id="contactForm">
+        <label>Ismingiz <input name="name" required></label>
+        <label>Telegram yoki telefon <input name="contact" required></label>
+        <label>Nima kerak? <textarea name="msg" rows="3"></textarea></label>
+        <button class="btn" type="submit">Yuborish</button>
+        <p id="formMsg" class="pipe-status" role="status"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <span>&copy; 2026 DevOps Outsource Team</span>
+    <span id="ver">v1.0.0</span>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
