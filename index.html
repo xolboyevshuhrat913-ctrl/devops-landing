@@ -1,103 +1,464 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>DevOps Outsource Team</title>
-  <meta name="description" content="Serveringiz, CI/CD va monitoring ishlarini biz o'z zimmamizga olamiz.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VektorOps — Bulutli Infratuzilma va DevOps Konsalting</title>
+  <meta name="description" content="Shtatda to'liq stavkali DevOps muhandis yollamasdan tezkor deploy, xavfsiz infratuzilma va bulut xarajatlarini optimallashtirish." />
+  
+  <!-- Modular CSS Files -->
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/sections.css" />
 </head>
 <body>
-  <header class="top">
-    <a class="logo" href="#">DevOps Outsource Team</a>
-    <nav>
-      <a href="#xizmatlar">Xizmatlar</a>
-      <a href="#jarayon">Jarayon</a>
-      <a href="#jamoa">Jamoa</a>
-      <a class="btn small" href="#aloqa">Bog'lanish</a>
-    </nav>
+
+  <!-- 1. YOPISHQOQ NAVIGATSIYA PANELI -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <a href="#" class="logo">
+        <span class="logo-mark">&gt;_</span>
+        <span>Vektor<strong>Ops</strong></span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#services">Xizmatlar</a>
+        <a href="#team">Jamoa</a>
+        <a href="#case-study">Natijalar</a>
+        <a href="#process">Jarayon</a>
+        <a href="#faq">Savol-javob</a>
+        <button class="btn btn-primary btn-sm open-modal-btn">Auditga yozilish</button>
+      </nav>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Menyuni ochish">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
   </header>
 
   <main>
+    <!-- 2. HERO QISMI -->
     <section class="hero">
-      <div class="hero-text">
-        <h1>Siz mahsulotni yozing. Deploy, server va monitoringni biz qilamiz.</h1>
-        <p>Kichik jamoalar uchun tayyor DevOps xizmati: server sozlash, CI/CD, Docker va doimiy nazorat.</p>
-        <a class="btn" href="#aloqa">Bepul maslahat olish</a>
-      </div>
-
-      <div class="pipeline" aria-live="polite">
-        <div class="pipe-head">
-          <span>main &middot; v1.0.0</span>
-          <button id="runBtn" class="btn small ghost" type="button">Deploy qilish</button>
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="badge">
+            <span class="dot"></span>
+            10–150 kishilik SaaS jamoalar uchun DevOps
+          </div>
+          <h1>Shtatda DevOps yollamasdan <span class="text-accent">10 baravar tezroq</span> deploy qiling</h1>
+          <p class="hero-sub">
+            Biz tez o‘sayotgan texnologik kompaniyalar uchun ishonchli, avtomatlashtirilgan va tejamkor bulutli infratuzilma quramiz. Dasturchilaringiz server sozlashga emas, mahsulot yaratishga e’tibor qaratsin.
+          </p>
+          <div class="hero-actions">
+            <button class="btn btn-primary open-modal-btn">Arxitektura auditiga yozilish</button>
+            <a href="#process" class="btn btn-outline">Qanday ishlashimizni ko‘rish</a>
+          </div>
         </div>
-        <ol class="stages" id="stages">
-          <li data-time="4s"><i></i><b>Commit</b><span>kod yuborildi</span></li>
-          <li data-time="38s"><i></i><b>Build</b><span>Docker image yig'ildi</span></li>
-          <li data-time="21s"><i></i><b>Test</b><span>barcha testlar o'tdi</span></li>
-          <li data-time="12s"><i></i><b>Deploy</b><span>serverga chiqarildi</span></li>
-        </ol>
-        <p class="pipe-status" id="pipeStatus">Tugmani bosing va pipeline&rsquo;ni ishga tushiring.</p>
+
+        <!-- Interaktiv Deploy Terminal -->
+        <div class="terminal-card">
+          <div class="terminal-header">
+            <div class="terminal-dots">
+              <span class="red"></span>
+              <span class="yellow"></span>
+              <span class="green"></span>
+            </div>
+            <span class="terminal-title">ci-cd-pipeline.yml — production</span>
+            <button class="btn-run" id="runDeployBtn">▶ Deployni sinash</button>
+          </div>
+          <div class="terminal-body" id="terminalOutput">
+            <div class="log-line"><span class="prompt">$</span> git push origin main</div>
+            <div class="log-line muted">[1/4] Docker obraz yig‘ilmoqda... (14s)</div>
+            <div class="log-line muted">[2/4] Xavfsizlik va unit testlar tekshirilmoqda... (22s)</div>
+            <div class="log-line muted">[3/4] Terraform infratuzilma rejasi tasdiqlandi</div>
+            <div class="log-line success">✓ Production muhitiga muvaffaqiyatli chiqarildi (0 uzilish)</div>
+          </div>
+          <div class="terminal-footer">
+            <span>Deploy vaqti: <strong>4 daq 12 son</strong></span>
+            <span>Uptime: <strong class="text-green">99.99%</strong></span>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section id="xizmatlar" class="block">
-      <h2>Nimalarni qilamiz</h2>
-      <div class="services">
-        <article>
-          <h3>Server va tarmoq</h3>
-          <p>Linux server, Nginx, HTTPS va xavfsizlik sozlamalari. Serveringiz birinchi kundan tayyor bo'ladi.</p>
-        </article>
-        <article>
-          <h3>CI/CD</h3>
-          <p>GitHub Actions orqali build, test va deploy avtomatik ishlaydi. Natija Telegram&rsquo;ga keladi.</p>
-        </article>
-        <article>
-          <h3>Docker va konteynerlar</h3>
-          <p>Loyihangizni Docker&rsquo;ga o'tkazamiz, shunda u har joyda bir xil ishlaydi.</p>
-        </article>
-        <article>
-          <h3>Monitoring</h3>
-          <p>Server tushib qolsa, siz bilishdan oldin biz xabar olamiz va tuzatamiz.</p>
-        </article>
+    <!-- 3. TEXNOLOGIYALAR STEKI -->
+    <section class="tech-bar">
+      <div class="container">
+        <p class="tech-label">Zamonaviy bulutli texnologiyalarda sinovdan o‘tgan</p>
+        <div class="tech-list">
+          <span>AWS</span>
+          <span>Google Cloud</span>
+          <span>Kubernetes</span>
+          <span>Terraform</span>
+          <span>Docker</span>
+          <span>GitHub Actions</span>
+        </div>
       </div>
     </section>
 
-    <section id="jarayon" class="block alt">
-      <h2>Qanday ishlaymiz</h2>
-      <ol class="steps">
-        <li><b>Tahlil.</b> Loyiha va serveringizni ko'rib chiqamiz.</li>
-        <li><b>Reja.</b> Narx va muddatni oldindan kelishamiz.</li>
-        <li><b>Joriy qilish.</b> Pipeline va serverni sozlaymiz.</li>
-        <li><b>Qo'llab-quvvatlash.</b> Monitoring va yangilanishlar bizda qoladi.</li>
-      </ol>
+    <!-- 4. MUAMMO VS YECHIM -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Muammo va Yechim</span>
+          <h2>Infratuzilma o‘sishingizga to‘siq bo‘lmasin</h2>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <div class="tag-problem">Muammo: Qo‘lda deploy qilish</div>
+            <h3>Har bir reliz — stress va xatolik xavfi</h3>
+            <p>Dasturchilar juma kuni kechqurun serverga qo‘lda kod yuklab, soatlab vaqt yo‘qotishadi.</p>
+            <div class="solution-box">
+              <strong>Yechim:</strong> Bir tugma bilan ishlaydigan to‘liq avtomatik CI/CD konveyer va xavfsiz rollback tizimi.
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="tag-problem">Muammo: Shishib ketgan bulut hisoblari</div>
+            <h3>AWS/GCP to‘lovlari har oy nazoratsiz o‘smoqda</h3>
+            <p>Ortiqcha ishlayotgan serverlar va noto‘g‘ri sozlangan bazalar byudjetning 40% gacha qismini yeb qo‘yadi.</p>
+            <div class="solution-box">
+              <strong>Yechim:</strong> FinOps auditi va Auto-Scaling orqali bulut xarajatlarini o‘rtacha 35–45% ga qisqartiramiz.
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="tag-problem">Muammo: Kutilmagan uzilishlar</div>
+            <h3>Trafik oshganda sayt yoki API qotib qoladi</h3>
+            <p>Monitoring yo‘qligi sababli muammoni muhandislardan oldin mijozlar sezadi.</p>
+            <div class="solution-box">
+              <strong>Yechim:</strong> 24/7 kuzatuv (Prometheus/Grafana) va yuklamaga avtomatik moslashuvchi Kubernetes klasteri.
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section id="jamoa" class="block">
-      <h2>Jamoa</h2>
-      <p class="lead">Jamoa a'zolari o'z ismi va rolini shu yerga qo'shadi (feature branch &rarr; PR).</p>
-      <div class="team" id="team"></div>
+    <!-- 5. ASOSIY XIZMATLAR -->
+    <section class="section bg-alt" id="services">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Xizmatlar</span>
+          <h2>Asosiy muhandislik yo‘nalishlarimiz</h2>
+        </div>
+
+        <div class="grid-2">
+          <div class="card service-card">
+            <span class="service-num">01</span>
+            <h3>Bulutli Arxitektura va Migratsiya (AWS / GCP)</h3>
+            <p>Yuqori yuklamaga chidamli, xavfsiz tarmoq (VPC) va ma’lumotlar bazasi arxitekturasini noldan loyihalaymiz yoki eski serverlardan ko‘chiramiz.</p>
+          </div>
+
+          <div class="card service-card">
+            <span class="service-num">02</span>
+            <h3>CI/CD Pipeline Avtomatizatsiyasi</h3>
+            <p>GitHub Actions yoki GitLab CI orqali kod yozilgandan to production muhitiga chiqqunga qadar barcha test va deploy bosqichlarini avtomatlashtiramiz.</p>
+          </div>
+
+          <div class="card service-card">
+            <span class="service-num">03</span>
+            <h3>Kubernetes va Konteyner Orkestratsiyasi</h3>
+            <p>EKS va GKE klasterlarini sozlash, mikroservislarni boshqarish va trafik o‘sishiga qarab resurslarni avtomatik kengaytirish.</p>
+          </div>
+
+          <div class="card service-card">
+            <span class="service-num">04</span>
+            <h3>Infrastructure as Code (Terraform) va FinOps</h3>
+            <p>Butun infratuzilmani toza Terraform kodiga o‘tkazamiz va bulut xarajatlarini doimiy nazorat qilib, ortiqcha to‘lovlarni bartaraf etamiz.</p>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section id="aloqa" class="block alt contact">
-      <h2>Loyihangiz haqida yozing</h2>
-      <form id="contactForm">
-        <label>Ismingiz <input name="name" required></label>
-        <label>Telegram yoki telefon <input name="contact" required></label>
-        <label>Nima kerak? <textarea name="msg" rows="3"></textarea></label>
-        <button class="btn" type="submit">Yuborish</button>
-        <p id="formMsg" class="pipe-status" role="status"></p>
-      </form>
+    <!-- 6. JAMOA A'ZOLARI (YANGI BO'LIM) -->
+    <section class="section" id="team">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Bizning jamoa</span>
+          <h2>Senior darajadagi DevOps va Cloud arxitektorlar</h2>
+          <p class="section-desc">Bizda junior stajyorlar yo‘q. Loyihangiz bilan kamida 7+ yillik tajribaga ega amaliyotchi muhandislar ishlaydi.</p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card team-card">
+            <div class="team-photo">
+              <img src="assets/team/member-1.svg" alt="Sardor Rahimov — Bosh Cloud Arxitektor" />
+            </div>
+            <div class="team-info">
+              <h3>Sardor Rahimov</h3>
+              <span class="team-role">Asoschi & Bosh Cloud Arxitektor</span>
+              <p>9 yillik tajriba. AWS Solutions Architect Professional. Yevropa va AQSh SaaS startaplarida 40+ bulutli infratuzilmani noldan qurgan.</p>
+              <div class="team-tags">
+                <span>AWS</span>
+                <span>Kubernetes</span>
+                <span>FinOps</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="card team-card">
+            <div class="team-photo">
+              <img src="assets/team/member-2.svg" alt="Madina Karimova — Lead DevSecOps Muhandis" />
+            </div>
+            <div class="team-info">
+              <h3>Madina Karimova</h3>
+              <span class="team-role">Lead DevSecOps & CI/CD Muhandis</span>
+              <p>8 yillik tajriba. ISO 27001 va SOC2 xavfsizlik standartlari, Terraform avtomatizatsiyasi hamda zero-downtime deploy tizimlari eksperti.</p>
+              <div class="team-tags">
+                <span>Terraform</span>
+                <span>DevSecOps</span>
+                <span>GitHub Actions</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="card team-card">
+            <div class="team-photo">
+              <img src="assets/team/member-3.svg" alt="Jasur Alimov — SRE va Observability Muhandisi" />
+            </div>
+            <div class="team-info">
+              <h3>Jasur Alimov</h3>
+              <span class="team-role">Senior SRE & Platform Muhandis</span>
+              <p>7 yillik tajriba. Yuqori yuklamali tizimlar barqarorligi, Prometheus/Grafana monitoring va ma’lumotlar bazalarini optimallashtirish mutaxassisi.</p>
+              <div class="team-tags">
+                <span>GCP</span>
+                <span>Prometheus</span>
+                <span>PostgreSQL</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. HAMKORLIK MODELLARI -->
+    <section class="section bg-alt">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Hamkorlik formatlari</span>
+          <h2>Jamoangizga mos keladigan modelni tanlang</h2>
+        </div>
+
+        <div class="grid-2">
+          <div class="card model-card">
+            <span class="model-badge">Bir martalik loyiha</span>
+            <h3>Infratuzilmani To‘liq Yangilash</h3>
+            <p>Ma’lum bir muammoni tez va sifatli hal qilishni istagan jamoalar uchun (3–6 hafta).</p>
+            <ul class="check-list">
+              <li>To‘liq arxitektura va xavfsizlik auditi</li>
+              <li>Terraform va CI/CD tizimini noldan qurish</li>
+              <li>AWS/GCP xarajatlarini optimallashtirish</li>
+              <li>Hujjatlar va ichki jamoaga bilim topshirish</li>
+            </ul>
+            <button class="btn btn-outline full-width open-modal-btn">Loyihani muhokama qilish</button>
+          </div>
+
+          <div class="card model-card featured">
+            <span class="model-badge accent">Eng ommabop</span>
+            <h3>Doimiy DevOps Hamkorlik (Retainer)</h3>
+            <p>To‘liq stavkali xodim xarajatlarisiz doimiy Senior DevOps bo‘limiga ega bo‘ling.</p>
+            <ul class="check-list">
+              <li>Slack orqali jamoangiz bilan kunlik aloqa</li>
+              <li>Yangi servislarni tezkor ishga tushirish</li>
+              <li>24/7 monitoring va insidentlarga javob berish</li>
+              <li>Oylik FinOps va xavfsizlik tekshiruvlari</li>
+            </ul>
+            <button class="btn btn-primary full-width open-modal-btn">Bepul auditga yozilish</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. MIJOZ KEYSI -->
+    <section class="section" id="case-study">
+      <div class="container">
+        <div class="case-box">
+          <div class="case-info">
+            <span class="eyebrow">Mijoz natijasi — MetricFlow (B2B SaaS)</span>
+            <h2>AWS xarajatlarini 38% ga kamaytirdik va deploy vaqtini 2 soatdan 6 daqiqaga tushirdik</h2>
+            <p>
+              45 nafar dasturchidan iborat MetricFlow jamoasi qo‘lda bajariladigan relizlar va o‘sib borayotgan bulut to‘lovlaridan qiynalayotgan edi. 4 hafta ichida butun tizimni EKS va Terraform ga o‘tkazdik.
+            </p>
+            <blockquote class="quote">
+              “VektorOps jamoasi bir oyda bizning 6 oylik texnik qarzimizni yopdi. Endi dasturchilarimiz kuniga 15 martagacha qo‘rqmasdan deploy qilishmoqda.”
+              <footer>— <strong>Azizbek Tursunov</strong>, MetricFlow CTO</footer>
+            </blockquote>
+          </div>
+
+          <div class="case-metrics">
+            <div class="metric">
+              <span class="metric-val">-38%</span>
+              <span class="metric-label">Oylik AWS xarajatlari tejaldi</span>
+            </div>
+            <div class="metric">
+              <span class="metric-val">6 daq</span>
+              <span class="metric-label">Deploy vaqti (avval 2 soat edi)</span>
+            </div>
+            <div class="metric">
+              <span class="metric-val">99.98%</span>
+              <span class="metric-label">Tizim barqarorligi (Uptime)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. 3 BOSQICHLI JARAYON -->
+    <section class="section bg-alt" id="process">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Ish jarayoni</span>
+          <h2>3 oddiy bosqichda natijaga erishamiz</h2>
+        </div>
+
+        <div class="grid-3">
+          <div class="card step-card">
+            <div class="step-num">1</div>
+            <h3>Infratuzilma Auditi (3–5 kun)</h3>
+            <p>Mavjud serverlar, CI/CD, xavfsizlik va bulut xarajatlarini chuqur tahlil qilib, aniq kamchiliklar ro‘yxatini beramiz.</p>
+          </div>
+
+          <div class="card step-card">
+            <div class="step-num">2</div>
+            <h3>Yo‘l xaritasi va Ijro (2–5 hafta)</h3>
+            <p>Ishlab turgan tizimga xalaqit bermagan holda Terraform, avtomatik deploy va monitoringni joriy qilamiz.</p>
+          </div>
+
+          <div class="card step-card">
+            <div class="step-num">3</div>
+            <h3>Topshirish yoki Doimiy Qo‘llab-quvvatlash</h3>
+            <p>To‘liq hujjatlar bilan jamoangizga topshiramiz yoki oylik hamkorlik asosida tizimni nazorat qilishda davom etamiz.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. SAVOL-JAVOB (FAQ) -->
+    <section class="section" id="faq">
+      <div class="container faq-container">
+        <div class="section-head">
+          <span class="eyebrow">Savol-javob</span>
+          <h2>Ko‘p beriladigan savollar</h2>
+        </div>
+
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Bulut akkauntlarimiz xavfsizligi qanday ta’minlanadi?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Barcha infratuzilma va kodlar faqat sizning shaxsiy AWS/GCP va GitHub akkauntlaringizda yaratiladi. Biz faqat minimal zarur huquqlar (Least Privilege IAM) va NDA shartnomasi asosida ishlaymiz.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Mavjud dasturchilarimiz bilan qanday hamkorlik qilasizlar?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Biz jamoangizning Slack/Telegram ishchi guruhiga qo‘shilamiz va haftalik qisqa sinxronizatsiya uchrashuvlari o‘tkazamiz. Dasturchilaringizni chalg‘itmasdan barcha infratuzilma vazifalarini o‘z zimmamizga olamiz.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Shartnoma muddati qancha?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Bir martalik loyihalar odatda 3–6 hafta davom etadi. Doimiy hamkorlik (Retainer) esa oylik asosda bo‘lib, uzoq muddatli majburiyatsiz istalgan vaqtda to‘xtatish imkoniyati mavjud.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Birinchi natijalar qachon ko‘rinadi?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Birinchi haftaning o‘zida to‘liq audit xulosasi va bulut xarajatlarini tezkor kamaytirish bo‘yicha aniq o‘zgarishlarni amalga oshiramiz.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- YAKUNIY CTA BANNER -->
+    <section class="section">
+      <div class="container">
+        <div class="cta-banner">
+          <h2>Infratuzilmangizni tartibga solishga tayyormisiz?</h2>
+          <p>30 daqiqalik bepul texnik konsultatsiyaga yoziling. Biz joriy tizimingizni ko‘rib chiqamiz va aniq yechim taklif qilamiz.</p>
+          <button class="btn btn-primary open-modal-btn">Bepul arxitektura auditiga yozilish</button>
+        </div>
+      </div>
     </section>
   </main>
 
-  <footer>
-    <span>&copy; 2026 DevOps Outsource Team</span>
-    <span id="ver">v1.0.0</span>
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <span class="logo-mark">&gt;_</span>
+          <span>Vektor<strong>Ops</strong></span>
+        </a>
+        <p>SaaS va texnologik kompaniyalar uchun ishonchli bulutli infratuzilma.</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="mailto:hello@vektorops.uz">hello@vektorops.uz</a>
+      </div>
+    </div>
   </footer>
-  <script src="script.js"></script>
+
+  <!-- AUDITGA YOZILISH MODALI -->
+  <div class="modal-overlay" id="auditModal" aria-hidden="true">
+    <div class="modal-box">
+      <button class="modal-close" id="closeModalBtn" aria-label="Yopish">&times;</button>
+      <h3>Bepul Arxitektura Auditi</h3>
+      <p class="modal-sub">Ma’lumotlaringizni qoldiring — 24 soat ichida muhandisimiz siz bilan bog‘lanadi.</p>
+
+      <form id="auditForm" class="modal-form">
+        <div class="form-group">
+          <label for="userName">Ismingiz</label>
+          <input type="text" id="userName" placeholder="Masalan: Jasur Karimov" required />
+        </div>
+        <div class="form-group">
+          <label for="userEmail">Ishchi email yoki Telegram</label>
+          <input type="text" id="userEmail" placeholder="jasur@kompaniya.uz yoki @username" required />
+        </div>
+        <div class="form-group">
+          <label for="userChallenge">Asosiy muammo nimada?</label>
+          <select id="userChallenge">
+            <option value="cicd">Deploy jarayoni sekin va qo‘lda bajariladi</option>
+            <option value="cost">AWS / GCP xarajatlari juda yuqori</option>
+            <option value="scale">Tizim barqarorligi va Kubernetes sozlash</option>
+            <option value="scratch">Infratuzilmani noldan qurish kerak</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary full-width">So‘rov yuborish</button>
+      </form>
+
+      <div class="modal-success" id="modalSuccess" hidden>
+        <div class="success-icon">✓</div>
+        <h4>So‘rovingiz qabul qilindi!</h4>
+        <p>Bosh arxitektorimiz tez orada siz bilan bog‘lanib, audit vaqtini belgilaydi.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modular JavaScript Files -->
+  <script src="js/navigation.js"></script>
+  <script src="js/terminal.js"></script>
+  <script src="js/accordion.js"></script>
+  <script src="js/modal.js"></script>
 </body>
 </html>
